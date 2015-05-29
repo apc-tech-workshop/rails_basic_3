@@ -395,3 +395,50 @@ Number of lines: 7
 ### 他のライブラリなど
 
 - `require 'date'`などとしてソースに書くように読み込みをしなければいけない
+- 標準オブジェクトはすぐに見える。
+
+
+```
+[3] pry(main)> show-source Array
+
+From: /Users/ito/work/rails_app/apc_rails_ws_hoge/vendor/bundle/ruby/2.2.0/gems/activesupport-4.2.1/lib/active_support/core_ext/array/access.rb @ line 1:
+Class name: Array
+Number of monkeypatches: 12. Use the `-a` option to display all available monkeypatches
+Number of lines: 64
+
+class Array
+  # Returns the tail of the array from +position+.
+  #
+  #   %w( a b c d ).from(0)  # => ["a", "b", "c", "d"]
+  #   %w( a b c d ).from(2)  # => ["c", "d"]
+  #   %w( a b c d ).from(10) # => []
+  #   %w().from(0)           # => []
+  #   %w( a b c d ).from(-2) # => ["c", "d"]
+  #   %w( a b c ).from(-10)  # => []
+  def from(position)
+    self[position, length] || []
+  end
+
+  # Returns the beginning of the array up to +position+.
+  #
+  #   %w( a b c d ).to(0)  # => ["a"]
+  #   %w( a b c d ).to(2)  # => ["a", "b", "c"]
+  #   %w( a b c d ).to(10) # => ["a", "b", "c", "d"]
+  #   %w().to(0)           # => []
+  #   %w( a b c d ).to(-2) # => ["a", "b", "c"]
+  #   %w( a b c ).to(-10)  # => []
+  def to(position)
+    if position >= 0
+      first position + 1
+    else
+      self[0..position]
+    end
+  end
+
+  # Equal to <tt>self[1]</tt>.
+  #
+  #   %w( a b c d e ).second # => "b"
+  def second
+    self[1]
+  end
+  ```
