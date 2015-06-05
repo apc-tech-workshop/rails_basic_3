@@ -1,8 +1,3 @@
----
-title: Rails 勉強会 #3
-notebook: a_rails勉強会
-tags:log
----
 <!-- MarkdownTOC -->
 
 - [1. init](#1-init)
